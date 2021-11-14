@@ -1,7 +1,11 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from src.scrap import search_artist_genre, scrap_genre_page
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
+)
 
 
 @app.get("/artist_genre")
