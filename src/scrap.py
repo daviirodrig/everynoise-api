@@ -19,7 +19,7 @@ def scrap_genre_page(genre):
     str_html = requests.get(url).text
     bs = BeautifulSoup(str_html, "lxml")
 
-    divs = bs.find_all("div", class_="genre")
+    divs = bs.find_all("div", class_="genre scanme")
     title_div = bs.find("div", class_="title")
     final = {"artists": [], "playlists": []}
 
