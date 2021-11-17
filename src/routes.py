@@ -8,11 +8,11 @@ app.add_middleware(
 )
 
 
-@app.get("/artist_genre")
-def artist_genre_search(artist: str):
-    result = search_artist_genre(artist)
+@app.get("/artist")
+def artist_genre_search(q: str):
+    result = search_artist_genre(q)
 
-    return {"artist": artist, "genres": result}
+    return {"artist": q, "genres": result}
 
 
 @app.get("/genre")
