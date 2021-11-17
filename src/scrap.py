@@ -16,7 +16,10 @@ def search_artist_genre(artist):
 
 def scrap_genre_page(genre):
     url = f"https://everynoise.com/engenremap-{genre}.html"
-    str_html = requests.get(url).content
+    req = requests.get(url)
+    if req.status_code == 404:
+        return {"artists": [], "playlists": []}
+    str_html = req.content
     bs = BeautifulSoup(str_html, "lxml")
 
     divs = bs.find_all("div", class_="genre scanme")
