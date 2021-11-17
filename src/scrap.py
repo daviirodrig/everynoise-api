@@ -5,7 +5,7 @@ import requests
 
 def search_artist_genre(artist):
     url = "https://everynoise.com/lookup.cgi"
-    str_html = requests.get(f"{url}?who={artist}").text
+    str_html = requests.get(f"{url}?who={artist}").content
 
     bs = BeautifulSoup(str_html, "lxml")
 
@@ -16,7 +16,7 @@ def search_artist_genre(artist):
 
 def scrap_genre_page(genre):
     url = f"https://everynoise.com/engenremap-{genre}.html"
-    str_html = requests.get(url).text
+    str_html = requests.get(url).content
     bs = BeautifulSoup(str_html, "lxml")
 
     divs = bs.find_all("div", class_="genre scanme")
