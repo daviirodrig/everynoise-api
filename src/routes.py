@@ -17,6 +17,11 @@ def artist_genre_search(q: str):
 
 @app.get("/genre")
 def genre_page(q: str):
-    result = scrap_genre_page(q.replace(" ", ""))
+    genre = remove_symbols(q)
+    result = scrap_genre_page(genre)
 
     return result
+
+
+def remove_symbols(string):
+    return "".join(c for c in string if c.isalnum())
