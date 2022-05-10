@@ -36,7 +36,7 @@ def scrap_genre_page(genre):
         )
 
     for i in title_div.children:
-        if type(i) != NavigableString:
+        if not isinstance(i, NavigableString):
             final["playlists"].append({i.text: i.attrs.get("href")})
 
     return final
