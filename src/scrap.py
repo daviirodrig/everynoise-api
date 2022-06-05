@@ -36,8 +36,12 @@ def scrap_genre_page(genre: str):
             }
         )
 
-    for i in title_div.children:  # type: ignore
-        if not isinstance(i, NavigableString):
-            final["playlists"].append({i.text: i.attrs.get("href")})  # type: ignore
+    for element in title_div.children:
+        try:
+            element_href = str(element.attrs.get("href"))
+            if element_href.startswith("https://open.spotify.com"):
+                final["playlists"].append({element.text: element_href})
+        except AttributeError:
+            pass
 
     return final
