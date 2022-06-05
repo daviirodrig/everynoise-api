@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.scrap import search_artist_genre, scrap_genre_page
+from src.scrap import scrap_artist_genres, scrap_genre_page
 
 app = FastAPI()
 app.add_middleware(
@@ -8,16 +8,16 @@ app.add_middleware(
 )
 
 
-@app.get("/artist")
-def artist_genre_search(q: str):
-    result = search_artist_genre(q)
+@app.get("/search/artist/{name}")
+def search_artist_route(name: str):
+    result = scrap_artist_genres(name)
 
-    return {"artist": q, "genres": result}
+    return {"artist": name, "genres": result}
 
 
-@app.get("/genre")
-def genre_page(q: str):
-    genre = remove_symbols(q)
+@app.get("/genre/{genre}")
+def genre_page(genre: str):
+    genre = remove_symbols(genre)
     result = scrap_genre_page(genre)
 
     return result
