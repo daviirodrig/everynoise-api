@@ -30,7 +30,9 @@ def scrap_genre_page(genre: str):
             {
                 "name": div.text[:-2],
                 "preview_url": div.get("preview_url"),
-                "song_title": div.attrs.get("title")[5:],
+                "song_title": div.attrs.get("title")[5:]
+                if div.attrs.get("title") != "(no sample available)"
+                else "",
                 "style": [i.strip() for i in div.get("style").split(";")],
             }
         )
