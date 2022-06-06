@@ -3,5 +3,10 @@ version: '3'
 services:
   api:
     build: .
+    container_name: everynoise-api
     ports:
       - 28996:28996
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./src/:/usr/app/src/
